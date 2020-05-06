@@ -24,21 +24,55 @@
         <div>
             <p>This python code flattens files distributed in multiple folders.</p>
 
-            <code>
-            import os<br>
-            import shutil<br>
+            <p style="margin-left: 40px">
+                Import required modules
+            </p>
             
-            destination = r"destination_path"<br>
-            source = r"source_path"<br>
-            folders = os.listdir(source)<br>
+                <p style="margin-left: 80px">
+                    <code>
+                        import os<br>
+                        import shutil<br>
+                    </code>
+                </p>
+                
+            <p style="margin-left: 40px">
+                Set source path, destination path and collect folder names
+            </p>
             
-            for folder in folders:<br>
-                file_path = os.path.join(source,folder)<br>
-                files = os.listdir(file_path)<br>
-                for file in files:<br>
-                    src = os.path.join(file_path,file)<br>
-                    dest = shutil.move(src, destination)<br>
-            </code>
+                <p style="margin-left: 80px">
+                    <code>
+                        destination = r"destination_path"<br>
+                        source = r"source_path"<br>
+                        folders = os.listdir(source)<br>
+                    </code>
+                </p>
+                
+            <p style="margin-left: 40px">
+                Iterate over the folders
+            </p>
+                <p style="margin-left: 80px">
+                    <code>
+                         for folder in folders:
+                    </code>
+                </p>
+                    <p style="margin-left: 120px">
+                        <code>
+                            file_path = os.path.join(source,folder)<br>
+                            files = os.listdir(file_path)<br>
+                        </code>
+                    </p>
+                    <p style="margin-left: 120px">
+                        <code>
+                             for file in files:
+                        </code>
+                    </p>
+                        <p style="margin-left: 160px">
+                            <code>
+                                src = os.path.join(file_path,file)<br>
+                                # Move file to destination<br>
+                                dest = shutil.move(src, destination)<br>
+                            </code>
+                        </p>
         </div>
     </body>
 </html>

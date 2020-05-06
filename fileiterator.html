@@ -23,26 +23,75 @@
         
         <div>
             <p>This python code iterates python commands over multiple files in a folder.</p>
-            <p>This example adds the name of the file into a dataframe.</p>
+            <p>This example also adds the name of the file into a dataframe.</p>
             
-            <code>
-            from bs4 import BeautifulSoup as BS<br>
-            import re<br>
-            import pandas as pd<br>
-            import os<br>
-            path = r"source_path"<br>
-            files = os.listdir(path)<br>
+            <p style="margin-left: 40px">
+                Import required modules
+            </p>
+                
+                <p style="margin-left: 80px">
+                    <code>
+                        from bs4 import BeautifulSoup as BS<br>
+                        import re<br>
+                        import pandas as pd<br>
+                        import os<br>
+                    </code>
+                </p>
+                
+            <p style="margin-left: 40px">
+                Set source path and collect file names
+            </p>
+
+                <p style="margin-left: 80px">
+                    <code>
+                        path = r"source_path"<br>
+                        files = os.listdir(path)<br>
+                    </code>
+                </p>
+                
+            <p style="margin-left: 40px">
+                Create dataframe with a column for file names
+            </p>
+
+                <p style="margin-left: 80px">
+                    <code>
+                        df = pd.DataFrame([], columns = ['name'])<br>
+                    </code>
+                </p>
+                
+            <p style="margin-left: 40px">
+                Iterate over the files
+            </p>
             
-            df = pd.DataFrame([], columns = ['name']) <br>
-            for file in files:<br>
-                file_path = os.path.join(path,file)<br>
-                f = open(file_path, "r")<br>
-                # Do what you want with the file here :)<br>
-                f.close()<br>
-                df = df.append({'name': file}, ignore_index=True)<br>
+                <p style="margin-left: 80px">
+                    <code>
+                         for file in files:
+                    </code>
+                </p>
+                       
+                <p style="margin-left: 120px">
+                    <code>
+                        file_path = os.path.join(path,file)<br>
+                        <br>
+                        # Open the file<br>
+                        f = open(file_path, "r")<br>
+                        # Do what you want with the file here :)<br>
+                        f.close()<br>
+                        <br>
+                        # Add file name to dataframe<br>
+                        df = df.append({'name': file}, ignore_index=True)<br>
+                    </code>
+                </p>
+                
+            <p style="margin-left: 40px">
+                Export the dataframe into a CSV file
+            </p>
             
-            df.to_csv (r"destination_path", index = False, header=True)<br>
-            </code>
+                <p style="margin-left: 80px">
+                    <code>
+                        df.to_csv (r"destination_path", index = False, header=True)<br>
+                    </code>
+                </p>
         </div>
     </body>
 </html>
