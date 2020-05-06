@@ -4,32 +4,23 @@
         <title>Atinder's Project Page</title>
         <link rel="stylesheet" type="text/css" href="assets/css/main.css">
         <link rel="SHORTCUT ICON" HREF="assets/images/face.jpeg">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     </head>
-    
-<nav>
-    <body data-spy="scroll" data-target=".navbar-collapse">
-        <!-- navigation bar-->
-        <div class="navbar">
-          <a href="index.html">Home</a>
-          <div class="dropdown">
-            <button class="dropbtn">Projects List
-              <i class="fa fa-caret-down"></i>
-            </button>
-            <div class="dropdown-content">
-              <a href="datavis.html">Data Visualisation</a>
-              <a href="#">More coming soon :)</a>
-              <a href="#">More coming soon :)</a>
+
+
+    <body>
+        <!--Navigation bar-->
+            <div id="nav-placeholder">
+            
             </div>
-          </div>
-          <p class="head">Atinder Sanghera's Project Page</p>
-        </div>
-</nav>
-
-
-
-
-
-
+        
+            <script>
+                $(function(){
+                  $("#nav-placeholder").load("navbar.html");
+                });
+            </script>
+        <!--end of Navigation bar-->
+        
         <h2>About Me</h2>
         
         <div>
@@ -59,5 +50,6 @@
             <br>
             <a href="datavis.html" class="buttonproject">Data Visualisation</a>
         </div>
+    </body>
 </html>
 
