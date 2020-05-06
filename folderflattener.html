@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en-US">
+    <head>
+        <title>Atinder's Project Page</title>
+        <link rel="stylesheet" type="text/css" href="assets/css/main.css">
+        <link rel="SHORTCUT ICON" HREF="assets/images/face.jpeg">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <!--Navigation bar-->
+            <div id="nav-placeholder">
+            
+            </div>
+        
+            <script>
+                $(function(){
+                  $("#nav-placeholder").load("navbar.html");
+                });
+            </script>
+        <!--end of Navigation bar-->
+    </head>
+
+    <body>
+        <h2>Folder Flattener</h2>
+        
+        <div>
+            <p>This python code flattens files distributed in multiple folders.</p>
+
+            <code>
+            import os<br>
+            import shutil<br>
+            
+            destination = r"destination_path"<br>
+            source = r"source_path"<br>
+            folders = os.listdir(source)<br>
+            
+            for folder in folders:<br>
+                file_path = os.path.join(source,folder)<br>
+                files = os.listdir(file_path)<br>
+                for file in files:<br>
+                    src = os.path.join(file_path,file)<br>
+                    dest = shutil.move(src, destination)<br>
+            </code>
+        </div>
+    </body>
+</html>

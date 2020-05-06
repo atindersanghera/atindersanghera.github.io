@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en-US">
+    <head>
+        <title>Atinder's Project Page</title>
+        <link rel="stylesheet" type="text/css" href="assets/css/main.css">
+        <link rel="SHORTCUT ICON" HREF="assets/images/face.jpeg">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <!--Navigation bar-->
+            <div id="nav-placeholder">
+            
+            </div>
+        
+            <script>
+                $(function(){
+                  $("#nav-placeholder").load("navbar.html");
+                });
+            </script>
+        <!--end of Navigation bar-->
+    </head>
+
+    <body>
+        <h2>File Iterator</h2>
+        
+        <div>
+            <p>This python code iterates python commands over multiple files in a folder.</p>
+            <p>This example adds the name of the file into a dataframe.</p>
+            
+            <code>
+            from bs4 import BeautifulSoup as BS<br>
+            import re<br>
+            import pandas as pd<br>
+            import os<br>
+            path = r"source_path"<br>
+            files = os.listdir(path)<br>
+            
+            df = pd.DataFrame([], columns = ['name']) <br>
+            for file in files:<br>
+                file_path = os.path.join(path,file)<br>
+                f = open(file_path, "r")<br>
+                # Do what you want with the file here :)<br>
+                f.close()<br>
+                df = df.append({'name': file}, ignore_index=True)<br>
+            
+            df.to_csv (r"destination_path", index = False, header=True)<br>
+            </code>
+        </div>
+    </body>
+</html>
