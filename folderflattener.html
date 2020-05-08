@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en-US">
     <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
         <title>Atinder's Project Page</title>
         <link rel="stylesheet" type="text/css" href="assets/css/main.css">
         <link rel="SHORTCUT ICON" HREF="assets/images/face.jpeg">
@@ -22,57 +23,28 @@
         <h2>Folder Flattener</h2>
         
         <div>
-            <p>This python code flattens files distributed in multiple folders.</p>
+    <p>This python code flattens files distributed in multiple folders.</p>
 
-            <p style="margin-left: 40px">
-                Import required modules
-            </p>
-            
-                <p style="margin-left: 80px">
-                    <code>
-                        import os<br>
-                        import shutil<br>
-                    </code>
-                </p>
+    <p style="margin-left: 40px">Import required modules</p>
+        <pre><code>            import os
+            import shutil
+        </code></pre>
+    <p style="margin-left: 40px">Set source path, destination path and collect folder names</p>
+        <pre><code>            destination = r"destination_path"
+            source = r"source_path"
+            folders = os.listdir(source)
+        </code></pre>
+    <p style="margin-left: 40px">Iterate over the folders</p>
+        <pre><code>             for folder in folders:
+                file_path = os.path.join(source,folder)
+                files = os.listdir(file_path)
                 
-            <p style="margin-left: 40px">
-                Set source path, destination path and collect folder names
-            </p>
-            
-                <p style="margin-left: 80px">
-                    <code>
-                        destination = r"destination_path"<br>
-                        source = r"source_path"<br>
-                        folders = os.listdir(source)<br>
-                    </code>
-                </p>
-                
-            <p style="margin-left: 40px">
-                Iterate over the folders
-            </p>
-                <p style="margin-left: 80px">
-                    <code>
-                         for folder in folders:
-                    </code>
-                </p>
-                    <p style="margin-left: 120px">
-                        <code>
-                            file_path = os.path.join(source,folder)<br>
-                            files = os.listdir(file_path)<br>
-                        </code>
-                    </p>
-                    <p style="margin-left: 120px">
-                        <code>
-                             for file in files:
-                        </code>
-                    </p>
-                        <p style="margin-left: 160px">
-                            <code>
-                                src = os.path.join(file_path,file)<br>
-                                # Move file to destination<br>
-                                dest = shutil.move(src, destination)<br>
-                            </code>
-                        </p>
+                # Iterate over files in folders
+                for file in files:
+                    src = os.path.join(file_path,file)
+                    # Move file to destination
+                    dest = shutil.move(src, destination)
+        </code></pre>
         </div>
     </body>
 </html>
