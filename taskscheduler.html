@@ -22,10 +22,11 @@
         <h2>Task Scheduler</h2>
         
         <div>
-    <p>This code automates python file runs and github commits.</p>
+    <p>This code automates python file runs and github commits.</p><br>
     
+    <p>The first section is automation of a python file.</p>
     <p style="margin-left: 40px">Create a text file with the following:</p>
-        <pre><code>        :: The first line is to activate your virtual environment if you are using one. I am using the base environment in Anaconda
+        <pre><code>            :: The first line is to activate your virtual environment if you are using one. I am using the base environment in Anaconda
             call C:\ProgramData\Anaconda3\condabin\activate.bat your-env-name
             
             :: Load your python version and run your .py file
@@ -40,8 +41,29 @@
     <p style="margin-left: 40px">Add the file to the task scheduler by right clicking the Windows icon in the bottom left of your screen and clicking "Computer Management"</p>
     <p style="margin-left: 40px">Click "Task Scheduler" in the left pane and then "Create Basic Task" in the right pane</p>
     <p style="margin-left: 40px">In the program script section, add the path to the bat file in double quotes: <code>"path to bat file"</code>. Enter other options as preferred</p> 
-    <p style="margin-left: 40px">The bat file opens the terminal as scheduled. Well done!</p> 
+    <p style="margin-left: 40px">The bat file will now open the terminal as scheduled. Well done!</p> 
     <p style="margin-left: 40px">To open the terminal silently in the background, download the free program "nircmd" and in the program script section add: <code>nircmd exec hide</code> in front of the double quotes</p> 
+    <br>
+    <br>
+    <p>This section deals with the automation of a Github commit.</p>
+    <p style="margin-left: 40px">Create a text file with the following:</p>
+        <pre><code>            :: Wait 120 sec for py files to run before activating this
+            timeout /t 120 /nobreak
+            
+            cd C:\repository-location-on-local-drive
+            
+            :: This code logs you into your github and sets an expiry of 10 minutes on the credentials. Set your username and password below.
+            git config --global git-username git-password
+            git config --global credential.helper store
+            git config --global credential.helper 'cache --timeout 600'
+            
+            :: Commits your files and pushes onto Github
+            git add *
+            git commit -m "New commit: %date:~-4% %date:~0,2%/%date:~3,2% - %time:~0,2%:%time:~3,2%"
+            git push
+            exit
+        </code></pre>
+        <p style="margin-left: 40px">Add this bat file into the task scheduler at the same location as the previous section</p> 
         </div>
     </body>
 </html>
