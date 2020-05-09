@@ -31,8 +31,7 @@
         </code></pre>
         
     <p style="margin-left: 40px">Set source path and collect file names</p>
-        <pre><code>            path = r"source_path"
-            files = os.listdir(path)
+        <pre><code>            files = os.listdir("your_source_path")
         </code></pre>
         
     <p style="margin-left: 40px">Create dataframe with a column for file names</p>
@@ -53,7 +52,7 @@
         </code></pre>
         
     <p style="margin-left: 40px">Export the dataframe into a CSV file</p>
-        <pre><code>            df.to_csv (r"destination_path", index = False, header=True)
+        <pre><code>            df.to_csv ("your_destination_path", index = False, header=True)
         </code></pre>
         </div>
     </body>
