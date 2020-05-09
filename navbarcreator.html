@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <title>Atinder's Project Page</title>
+        <link rel="stylesheet" type="text/css" href="assets/css/main.css">
+        <link rel="SHORTCUT ICON" HREF="assets/images/face.jpeg">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <!--Navigation bar-->
+            <div id="nav-placeholder">
+            </div>
+        
+            <script>
+                $(function(){
+                  $("#nav-placeholder").load("navbar.html");
+                });
+            </script>
+        <!--end of Navigation bar-->
+    </head>
+
+    <body>
+        <h2>File Iterator</h2>
+        
+        <div>
+    <p>This python code iterates python commands over multiple files in a folder.</p>
+    <p>This example also adds the name of the file into a dataframe.</p>
+    
+    <p style="margin-left: 40px">Import required modules</p>
+        <pre><code>            import pandas as pd
+            import os
+        </code></pre>
+        
+    <p style="margin-left: 40px">Set source path and collect file names</p>
+        <pre><code>            path = r"source_path"
+            files = os.listdir(path)
+        </code></pre>
+        
+    <p style="margin-left: 40px">Create dataframe with a column for file names</p>
+        <pre><code>            df = pd.DataFrame([], columns = ['name'])
+        </code></pre>
+        
+    <p style="margin-left: 40px">Iterate over the files</p>
+        <pre><code>             for file in files:
+                file_path = os.path.join(path,file)
+                
+                # Open the file
+                f = open(file_path, "r")
+                # Do what you want with the file here :)
+                f.close()
+                
+                # Add file name to dataframe
+                df = df.append({'name': file}, ignore_index=True)
+        </code></pre>
+        
+    <p style="margin-left: 40px">Export the dataframe into a CSV file</p>
+        <pre><code>            df.to_csv (r"destination_path", index = False, header=True)
+        </code></pre>
+        </div>
+    </body>
+</html>

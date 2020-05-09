@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en-US">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <title>Atinder's Project Page</title>
+        <link rel="stylesheet" type="text/css" href="assets/css/main.css">
+        <link rel="SHORTCUT ICON" HREF="assets/images/face.jpeg">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <!--Navigation bar-->
+            <div id="nav-placeholder">
+            </div>
+        
+            <script>
+                $(function(){
+                  $("#nav-placeholder").load("navbar.html");
+                });
+            </script>
+        <!--end of Navigation bar-->
+    </head>
+
+    <body>
+        <h2>Task Scheduler</h2>
+        
+        <div>
+    <p>This code automates python file runs and github commits.</p>
+    
+    <p style="margin-left: 40px">Create a text file with the following:</p>
+        <pre><code>        :: The first line is to activate your virtual environment if you are using one. I am using the base environment in Anaconda
+            call C:\ProgramData\Anaconda3\condabin\activate.bat your-env-name
+            
+            :: Load your python version and run your .py file
+            C:\ProgramData\Anaconda3\python.exe "./*.py"
+            
+            :: It is good practice to deactivate your virtual environment
+            call C:\ProgramData\Anaconda3\condabin\deactivate.bat
+        </code></pre>
+    <p style="margin-left: 40px">Text can be added to the file if preceded with two colons: "::"</p>
+    <p style="margin-left: 40px">Save the file and rename the extension to "bat"</p>
+    
+    <p style="margin-left: 40px">Add the file to the task scheduler by right clicking the Windows icon in the bottom left of your screen and clicking "Computer Management"</p>
+    <p style="margin-left: 40px">Click "Task Scheduler" in the left pane and then "Create Basic Task" in the right pane</p>
+    <p style="margin-left: 40px">In the program script section, add the path to the bat file in double quotes: <code>"path to bat file"</code>. Enter other options as preferred</p> 
+    <p style="margin-left: 40px">The bat file opens the terminal as scheduled. Well done!</p> 
+    <p style="margin-left: 40px">To open the terminal silently in the background, download the free program "nircmd" and in the program script section add: <code>nircmd exec hide</code> in front of the double quotes</p> 
+        </div>
+    </body>
+</html>
