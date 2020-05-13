@@ -1,8 +1,25 @@
+.heading {
+    font-family: Gotham;
+    font-weight: 400;
+    color: rgba(101, 143, 156, 1);
+    margin-left:25px;
+}
+
+.body {
+    font-family: Gotham;
+    font-weight: 300;
+    margin-left: 50px;
+}
+
+.post {
+    font-family: Gotham;
+    font-weight: 300;
+    text-align: center;
+}
 
 .navbar {
   overflow: hidden;
-  background-color: rgba(176, 224, 230, 0.5);
-  font-family: Arial;
+  background-color: rgba(176, 224, 255, 0.4);
 }
 
 .navbar a {
@@ -12,11 +29,15 @@
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
+  font-family: Gotham;
+  font-weight: 300;
 }
 
 .dropdown {
   float: left;
   overflow: hidden;
+  font-family: Gotham;
+  font-weight: 300;
 }
 
 .dropdown .dropbtn {
@@ -27,6 +48,7 @@
   padding: 14px 16px;
   background-color: inherit;
   font-family: inherit; /* Important for vertical align on mobile phones */
+  font-weight: inherit; /* Important for vertical align on mobile phones */
   margin: 0; /* Important for vertical align on mobile phones */
 }
 
@@ -63,11 +85,14 @@
 .head {
   text-align: right;
   color: rgba(101, 143, 156, 1);
+  font-family: Gotham;
+  font-weight: 300;
 }
 
-a.button {
-  background-color: rgba(176, 224, 230, 0.5);
+.button {
+  background-color: rgba(176, 224, 255, 0.4);
   border: none;
+  border-left: 5px solid rgba(101, 143, 156);
   color: rgba(101, 143, 156, 1);
   padding: 15px 32px;
   text-align: center;
@@ -78,9 +103,10 @@ a.button {
   cursor: pointer;
 }
 
-a.buttonproject {
-  background-color: rgba(176, 224, 230, 0.5);
+.buttonproject {
+  background-color: rgba(176, 224, 255, 0.4);
   border: none;
+  border-left: 5px solid rgba(101, 143, 156);
   color: rgba(101, 143, 156, 1);
   padding: 15px 150px;
   text-align: center;
@@ -90,3 +116,4 @@ a.buttonproject {
   margin: 4px 2px;
   cursor: pointer;
 }
+
