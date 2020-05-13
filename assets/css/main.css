@@ -17,6 +17,18 @@
     text-align: center;
 }
 
+.posttitle {
+    background-color: rgba(176, 224, 255, 0.4);
+    border: none;
+    color: rgba(101, 143, 156, 1);
+    padding: 15px 150px;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
 .navbar {
   overflow: hidden;
   background-color: rgba(176, 224, 255, 0.4);
