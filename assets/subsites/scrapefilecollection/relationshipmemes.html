@@ -1,32 +1,30 @@
 <!doctype html>
             <html lang="en-US">
-                <head>
-                    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-                    <title>Atinder's Project Page</title>
-                    <link rel="stylesheet" type="text/css" href="assets/css/main.css">
-                    <link rel="SHORTCUT ICON" HREF="assets/images/face.jpeg">
-                    <!-- Global site tag (gtag.js) - Google Analytics -->
-                    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166253975-1"></script>
+            <head>
+                <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+                <title>Atinder's Project Page</title>
+                <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+                <link rel="SHORTCUT ICON" HREF="/assets/images/face.jpeg">
+                <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166253975-1"></script>
+                <script>
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                
+                  gtag('config', 'UA-166253975-1');
+                </script>
+                <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+            </head>
+            <body>
+                <!--Navigation bar-->
+                    <div id="nav-placeholder">
+                    </div>
                     <script>
-                      window.dataLayer = window.dataLayer || [];
-                      function gtag(){dataLayer.push(arguments);}
-                      gtag('js', new Date());
-                    
-                      gtag('config', 'UA-166253975-1');
+                        $(function(){
+                          $("#nav-placeholder").load("/navbar.html");
+                        });
                     </script>
-                    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-                </head>
-            
-                <body>
-                    <!--Navigation bar-->
-                        <div id="nav-placeholder">
-                        </div>
-                        <script>
-                            $(function(){
-                              $("#nav-placeholder").load("navbar.html");
-                            });
-                        </script>
-                    <!--end of Navigation bar-->
+                <!--end of Navigation bar-->
             
                 <h2 class="heading">Relationship Memes</h2>
                 <p class="body">Last updated: Wed May 13, 2020</p><br>
