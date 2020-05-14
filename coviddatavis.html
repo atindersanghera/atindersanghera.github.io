@@ -32,20 +32,21 @@
         
         <div class="body">
             <p>I felt that currently available COVID-19 maps do not account for population when providing figures of confirmed cases. I think that it leads to a misrepresentation of the areas which are most affected and misses out on important trends.</p>
-            <p>The cases by population map shows that residents of affluent suburbs were affected more than others. (Woollahra, Waverly, Hunters Hill, Mosman)</p>
-            <p>These maps show COVID-19 cases, the number of tests and Local Government Area statistics.</p>
+            <p>So I used Folium to create choropleth leaflet maps to visualise data such as confirmed COVID-19 cases over time and confirmed COVID-19 cases divided by population.</p>
+            <p>The cases divided by population map shows that residents of affluent suburbs were affected more than others. (Woollahra, Waverly, Hunters Hill, Mosman)</p>
+            <p>The maps show tooltips containing confirmed COVID-19 cases, the number of tests and Local Government Area statistics.</p>
             <br>
             <div style="margin-left:50px">
                 <a href=".\assets\subsites\covid19\covid19_map_cases_time_slider.html" class="buttonproject">Map of Confirmed COVID-19 Cases over Time</a><br/>
                 <a href=".\assets\subsites\covid19\covid19_map_cases.html" class="buttonproject">Map of Confirmed COVID-19 Cases</a><br/>
-                <a href=".\assets\subsites\covid19\covid19_map_cases_by_population.html " class="buttonproject">Map of Confirmed COVID-19 Cases over Population</a><br/>
+                <a href=".\assets\subsites\covid19\covid19_map_cases_by_population.html " class="buttonproject">Map of Confirmed COVID-19 Cases divided by Population</a><br/>
                 <a href=".\assets\subsites\covid19\map_population.html" class="buttonproject">Map of Population</a><br/>
-                <a href=".\assets\subsites\covid19\map_population_area.html" class="buttonproject">Map of Population over Area</a><br/>
+                <a href=".\assets\subsites\covid19\map_population_area.html" class="buttonproject">Map of Population divided by Area</a><br/>
             </div>
             
-    <p><br><br>I used Folium to create choropleth leaflet maps for each of the cases above.
-        Due to GitHub file size limits I had to split the maps up into sections. The large file sizes also means that the maps take a little longer than usual to load.
-        An alternative to Folium is to use Plotly to make a static (and less pretty) map.</p>
+    <p><br><br>I have also written some of my code so that anyone can replicate and improve on what I have done here.
+        Due to GitHub file size limits I had to split the maps up into sections and these large file sizes also mean that the maps take a little longer than usual to load.
+        An alternative to Folium would be to use Plotly to make a smaller sized, static (and less pretty) map.</p>
     <p>The code below is a sample of the code I have written for creating the time slider map and cases map in one view.</p>
         
     <p style="margin-left: 40px">Import required modules</p>

@@ -31,14 +31,14 @@
         <h2 class="heading">Task Scheduler</h2>
         
         <div class="body">
-    <p>This code automates python file runs and github commits.</p><br>
+    <p>This code automates Python file executions and GitHub commits.</p><br>
     
-    <p>The first section is automation of a python file.</p>
+    <p>The first section is automation of a Python file.</p>
     <p style="margin-left: 40px">Create a text file with the following:</p>
-        <pre><code>            :: The first line is to activate your virtual environment if you are using one. I am using the base environment in Anaconda
+        <pre><code>            :: The first line is to activate your virtual environment if you are using one. I am using the base environment in Anaconda so I leave it blank
             call C:\ProgramData\Anaconda3\condabin\activate.bat your-env-name
             
-            :: Load your python version and run your .py file
+            :: Load your Python version and run your .py file
             C:\ProgramData\Anaconda3\python.exe "./*.py"
             
             :: It is good practice to deactivate your virtual environment
@@ -54,19 +54,19 @@
     <p style="margin-left: 40px">To open the terminal silently in the background, download the free program "nircmd" and in the program script section add: <code>nircmd exec hide</code> in front of the double quotes</p> 
     <br>
     <br>
-    <p>This section deals with the automation of a Github commit.</p>
+    <p>This section deals with the automation of a GitHub commit.</p>
     <p style="margin-left: 40px">Create a text file with the following:</p>
         <pre><code>            :: Wait 120 sec for py files to run before activating this
             timeout /t 120 /nobreak
             
             cd C:\repository-location-on-local-drive
             
-            :: This code logs you into your github and sets an expiry of 10 minutes on the credentials. Set your username and password below.
-            git config --global git-username git-password
+            :: This code logs you into your GitHub and sets an expiry of 10 minutes on the credentials. Replace your username and password below.
+            git config --global username password
             git config --global credential.helper store
             git config --global credential.helper 'cache --timeout 600'
             
-            :: Commits your files and pushes onto Github
+            :: Commits your files and pushes onto GitHub
             git add *
             git commit -m "New commit: %date:~-4% %date:~0,2%/%date:~3,2% - %time:~0,2%:%time:~3,2%"
             git push
