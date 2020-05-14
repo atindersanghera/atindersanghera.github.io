@@ -64,7 +64,7 @@
   font-weight: 300;
 }
 
-.dropdown {
+.dropdown {;
   float: left;
   overflow: hidden;
   font-family: Gotham;
@@ -117,7 +117,7 @@
   text-align: right;
   color: rgba(101, 143, 156, 1);
   font-family: Gotham;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .button {
