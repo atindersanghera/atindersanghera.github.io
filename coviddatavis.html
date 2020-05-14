@@ -33,12 +33,196 @@
         <div class="body">
             <p>I felt that currently available COVID-19 maps do not account for population when providing figures of confirmed cases. I think that it leads to a misrepresentation of the areas which are most affected and misses out on important trends.</p>
             <p>The cases by population map shows that residents of affluent suburbs were affected more than others. (Woollahra, Waverly, Hunters Hill, Mosman)</p>
+            <p>These maps show COVID-19 cases, the number of tests and Local Government Area statistics.</p>
             <br>
-            <a href=".\assets\subsites\covid19\covid19_map_cases_time_slider.html" class="buttonproject">Map of Confirmed COVID-19 Cases over Time</a><br/>
-            <a href=".\assets\subsites\covid19\covid19_map_cases.html" class="buttonproject">Map of Confirmed COVID-19 Cases</a><br/>
-            <a href=".\assets\subsites\covid19\covid19_map_cases_by_population.html " class="buttonproject">Map of Confirmed COVID-19 Cases over Population</a><br/>
-            <a href=".\assets\subsites\covid19\map_population.html" class="buttonproject">Map of Population</a><br/>
-            <a href=".\assets\subsites\covid19\map_population_area.html" class="buttonproject">Map of Population over Area</a><br/>
+            <div style="margin-left:50px">
+                <a href=".\assets\subsites\covid19\covid19_map_cases_time_slider.html" class="buttonproject">Map of Confirmed COVID-19 Cases over Time</a><br/>
+                <a href=".\assets\subsites\covid19\covid19_map_cases.html" class="buttonproject">Map of Confirmed COVID-19 Cases</a><br/>
+                <a href=".\assets\subsites\covid19\covid19_map_cases_by_population.html " class="buttonproject">Map of Confirmed COVID-19 Cases over Population</a><br/>
+                <a href=".\assets\subsites\covid19\map_population.html" class="buttonproject">Map of Population</a><br/>
+                <a href=".\assets\subsites\covid19\map_population_area.html" class="buttonproject">Map of Population over Area</a><br/>
+            </div>
+            
+    <p><br><br>I used Folium to create choropleth leaflet maps for each of the cases above.
+        Due to GitHub file size limits I had to split the maps up into sections. The large file sizes also means that the maps take a little longer than usual to load.
+        An alternative to Folium is to use Plotly to make a static (and less pretty) map.</p>
+    <p>The code below is a sample of the code I have written for creating the time slider map and cases map in one view.</p>
+        
+    <p style="margin-left: 40px">Import required modules</p>
+        <pre><code>            import numpy as np
+            import pandas as pd
+            import os
+            import branca.colormap as cm
+            import folium # makes interactive
+            import geopandas as gpd
+            from folium.plugins import TimeSliderChoropleth
+        </code></pre>
+
+    <p style="margin-left: 40px">I like to modify the output of the console so that dataframes are more readable by increasing the console output size</p>
+        <pre><code>            pd.set_option('display.max_columns', None)
+            pd.set_option('display.width', 140)
+        </code></pre>
+
+    <p style="margin-left: 40px">Open the COVID-19 dataset provided by the NSW Ministry of Health</p>
+        <pre><code>            df = pd.read_csv("https://data.nsw.gov.au/data/dataset/5424aa3b-550d-4637-ae50-7f458ce327f4/resource/227f6b65-025c-482c-9f22-a25cf1b8594f/download/covid-19-tests-by-date-and-location-and-result.csv")
+        </code></pre>
+    <p style="margin-left: 40px">Remove missing data and select relevant columns</p>
+        <pre><code>            df = df[~df['lga_code19'].isna()]
+            df = df[['test_date','lga_name19','result']]
+        </code></pre>
+
+    <p style="margin-left: 40px">Edit the dates to reflect the Australian date format as we put days first</p>
+        <pre><code>            df['test_date'] = pd.to_datetime(df['test_date'], dayfirst=True) 
+        </code></pre>
+    <p style="margin-left: 40px">Sort the values by date in ascending order so the first test conducted is at the top</p>
+        <pre><code>            df = df.sort_values('test_date')
+        </code></pre>
+
+    <p style="margin-left: 40px">Read the shapefile that provides the geometry of Local Government Areas, then select relevant columns and drop duplicates</p>
+        <pre><code>            lga_coord = gpd.read_file('./nsw_lga_polygon_shp-gda2020/NSW_LGA_POLYGON_shp.shp')
+            lga_coord = lga_coord[['NSW_LGA__3','geometry']]
+            lga_coord = lga_coord.drop_duplicates('NSW_LGA__3')
+        </code></pre>
+
+    <p style="margin-left: 40px">Create a label encoding of the categorical variable 'result'</p>
+        <pre><code>            df['result'] = [1 if i == 'Case - Confirmed' else 0 for i in df['result']]
+        </code></pre>
+
+    <p style="margin-left: 40px">Group by LGA and for each COVID-19 case occurence, obtain the number of cases, number of tests and the cumulative number cases</p>
+        <pre><code>            df['case_count'] = df.groupby(['lga_name19'], as_index=False)['result'].transform('sum')
+            df['test_count'] = df.groupby(['lga_name19'], as_index=False)['result'].transform('count')
+            df['cum_count'] = df.groupby(['lga_name19'], as_index=False)['result'].transform('cumsum')
+        </code></pre>
+
+    <p style="margin-left: 40px">Group the data by LGA and using the 'result' column obtain the sum which is the number of confirmed cases and the count which is the number of tests conducted</p>
+        <pre><code>            grouped_data = df.groupby(['lga_name19'], as_index=False)['result'].sum()
+            grouped_data_tmp = df.groupby(['lga_name19'], as_index=False)['result'].count()
+        </code></pre>
+
+    <p style="margin-left: 40px">Rename the new columns and copy the test count from the temporary dataframe to the main one</p>
+        <pre><code>            grouped_data = grouped_data.rename({'result': 'case_count'}, axis='columns')
+            grouped_data['test_count'] = grouped_data_tmp['result'].copy()
+        </code></pre>
+
+    <p style="margin-left: 40px">Edit the LGA names column to match the shapefile</p>
+        <pre><code>            # Strip the cities and areas tag from the LGA names (The suffix part in brackets)
+            grouped_data['lga_name19'] = [name.split('(')[0].rstrip() for name in grouped_data['lga_name19']]
+            # Make a backup of the LGA names
+            grouped_data['NSW_LGA__3_orig'] = grouped_data['lga_name19'].copy()
+            # Rename the column to match the shapefile
+            grouped_data = grouped_data.rename(columns={'lga_name19': 'NSW_LGA__3'})
+            # Convert the LGA names to uppercase to match the shapefile
+            grouped_data['NSW_LGA__3'] = [name.upper() for name in grouped_data['NSW_LGA__3']]
+            df['NSW_LGA__3'] = [name.upper() for name in df['lga_name19']]
+        </code></pre>
+
+    <p style="margin-left: 40px">Join the shapefile with the grouped data</p>
+        <pre><code>            latest_df = grouped_data.merge(lga_coord, on='NSW_LGA__3')
+        </code></pre>
+
+    <p style="margin-left: 40px">Create a colour scale using the cumulative case counts</p>
+        <pre><code>            max_colour = max(df['cum_count'])
+            min_colour = min(df['cum_count'])
+            cmap = cm.linear.YlOrRd_09.scale(min_colour, max_colour)
+            latest_df['colour'] = latest_df['case_count'].map(cmap)
+            df['colour'] = df['cum_count'].map(cmap)
+        </code></pre>
+
+    <p style="margin-left: 40px">Make a style dictionary for the slider map which is done by creating a dictionary where each date has a colour and an opacity</p>
+        <pre><code>            lga_list = latest_df['NSW_LGA__3'].tolist()
+            lga_idx = range(len(lga_list))
+            style_dict = {}
+            for i in lga_idx:
+                lga = lga_list[i]
+                result = df[df['NSW_LGA__3'] == lga]
+                
+                result = result.drop_duplicates('test_date', keep='last') # remove duplicate dates
+                # set the date as the index
+                result.index = pd.DatetimeIndex(result['test_date'])
+                # choose relevant columns and discard others
+                result = result[['NSW_LGA__3', 'cum_count', 'case_count', 'colour']]
+                
+                # recreate the index by filling missing dates with empty rows
+                idx = pd.date_range(start_date, curr_date)
+                result = result.reindex(idx, fill_value=np.NaN)
+                
+                # Fill the missing data
+                result = result.fillna(method='ffill')
+                result['cum_count'] = result['cum_count'].fillna(0)
+                result['case_count'] = result['case_count'].fillna(method='bfill')
+                result['NSW_LGA__3'] = result['NSW_LGA__3'].fillna(method='bfill')
+                result['colour'] = result['colour'].fillna(cmap(0))
+                
+                # Change the date time to epochs which is a compatible format which the Folium map function
+                datetime_index = pd.DatetimeIndex(result.index)
+                dt_index_epochs = datetime_index.astype(int) // 10**9
+                dt_index = np.array(dt_index_epochs).astype('U10')
+                result['dt_index'] = dt_index
+                
+                # Create the style dictionary
+                inner_dict = {}
+                for _, r in result.iterrows():
+                    inner_dict[r['dt_index']] = {'color': r['colour'], 'opacity': 0.5}
+                style_dict[str(i)] = inner_dict
+        </code></pre>
+
+    <p style="margin-left: 40px">Create a dataframe with unique coordinates</p>
+        <pre><code>            lga_df = latest_df[['geometry']]
+            lga_gdf = gpd.GeoDataFrame(lga_df).reset_index().drop('index', axis=1)
+        </code></pre>
+
+    <p style="margin-left: 40px">Create the base map zoomed in on Sydney</p>
+        <pre><code>            slider_map = folium.Map(location=[-33.88, 151.10], height=600, zoom_start=12, min_zoom=None, max_bounds=True, tiles='cartodbpositron')
+        </code></pre>
+
+    <p style="margin-left: 40px">Add data and create the time slider</p>
+        <pre><code>            TimeSliderChoropleth(data=lga_gdf.to_json(),
+                                  styledict=style_dict,
+                                  name='Confirmed NSW cases over time',
+            ).add_to(slider_map)
+        </code></pre>
+
+    <p style="margin-left: 40px">Add the legend to the map showing the colour scale</p>
+        <pre><code>            _ = cmap.add_to(slider_map)
+            cmap.caption = "Number of Confirmed COVID-19 Cases"
+        </code></pre>
+
+    <p style="margin-left: 40px">Set up and overlay another map allowing the display of tooltips containing relevant data by editing the opacity on the new map to make it transparent so that the original map is visible</p>
+        <pre><code>            confirmed_series = latest_df.set_index('NSW_LGA__3')['case_count']
+            lga_df = latest_df[['geometry','case_count','test_count','NSW_LGA__3_orig']]
+            lga_gdf = gpd.GeoDataFrame(lga_df).reset_index().drop('index', axis=1)
+            def style_function_latest(feature):
+                cntr = confirmed_series.get(int(feature['id'][-5:]), None)
+                return {
+                    'fillOpacity': 0,
+                    'weight': 0,
+                    'line_opacity': 0.2,
+                    'fillColor': '#black' if cntr is None else cmap(cntr)
+                }
+            folium.GeoJson(
+                lga_gdf.to_json(),
+                name='Confirmed Cases To Date',
+                style_function=style_function_latest,
+                highlight_function=lambda x: {'weight':3, 'color':'black'}, # Makes outlines look pretty
+                smooth_factor=2.0,
+                tooltip=folium.GeoJsonTooltip(
+                            fields=['NSW_LGA__3_orig', 'case_count', 'test_count'],
+                            aliases=['Council Area', 'Confirmed Cases as of '+curr_date_str, 'Tests as of '+curr_date_str],
+                            localize=True,
+                        )
+            ).add_to(slider_map)
+        </code></pre>
+
+    <p style="margin-left: 40px">Add labels for NSW suburbs to prettify the map</p>
+        <pre><code>            folium.map.CustomPane('labels').add_to(slider_map)
+            folium.TileLayer('CartoDBPositronOnlyLabels',
+                              pane='labels').add_to(slider_map)
+        </code></pre>
+
+    <p style="margin-left: 40px">Save the map locally as a HTML file</p>
+        <pre><code>            slider_map.save(r'./map.html')
+        </code></pre>
+        
         </div>
     </body>
 </html>
