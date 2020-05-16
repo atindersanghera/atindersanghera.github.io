@@ -1,18 +1,20 @@
+@import url("/assets/fonts/Gotham/gotham.css");
+
 .heading {
-    font-family: Gotham;
+    font-family: GothamPro;
     font-weight: 400;
     color: rgba(101, 143, 156, 1);
     margin-left:25px;
 }
 
 .body {
-    font-family: Gotham;
+    font-family: GothamPro;
     font-weight: 300;
     margin-left: 50px;
 }
 
 .post {
-    font-family: Gotham;
+    font-family: GothamPro;
     font-weight: 300;
     text-align: center;
     display: none;
@@ -31,7 +33,7 @@
 }
 
 .load {
-    font-family: Gotham;
+    font-family: GothamPro;
     font-weight: 300;
     text-align: center;
 }
@@ -60,14 +62,14 @@
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
-  font-family: Gotham;
+  font-family: GothamPro;
   font-weight: 300;
 }
 
 .dropdown {;
   float: left;
   overflow: hidden;
-  font-family: Gotham;
+  font-family: GothamPro;
   font-weight: 300;
 }
 
@@ -116,7 +118,7 @@
 .head {
   text-align: right;
   color: rgba(101, 143, 156, 1);
-  font-family: Gotham;
+  font-family: GothamPro;
   font-weight: 400;
 }
 
