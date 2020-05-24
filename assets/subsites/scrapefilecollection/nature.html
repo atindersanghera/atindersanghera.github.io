@@ -508,6 +508,7 @@
 <p><font size="0.5">Date posted: 8 May, 2020&nbsp;Source: https://i.redd.it/c3p7aw3kudx41.jpg</font></p>
 <img class="lazy" data-src="https://i.redd.it/c3p7aw3kudx41.jpg" style="height:600px"><br><br>
 </div>
+                    # Load more
                     <script>
                         $(function() {
                             $(".post").slice(0, 50).show(); // select the first ten
@@ -524,12 +525,13 @@
                         <br><br><a href="#" id="load" class="posttitle">Load More</a>
                     </div>
                     
+                    # Lazy load images
                     <script>
                           document.addEventListener("DOMContentLoaded", function() {
                           var lazyloadImages;    
                         
                           if ("IntersectionObserver" in window) {
-                            lazyloadImages = document.querySelectorAll(".lazy");
+                            lazyloadImages = document.querySelectorAll("img.lazy");
                             var imageObserver = new IntersectionObserver(function(entries, observer) {
                               entries.forEach(function(entry) {
                                 if (entry.isIntersecting) {
@@ -562,6 +564,64 @@
                                     }
                                 });
                                 if(lazyloadImages.length == 0) { 
+                                  document.removeEventListener("scroll", lazyload);
+                                  window.removeEventListener("resize", lazyload);
+                                  window.removeEventListener("orientationChange", lazyload);
+                                }
+                              }, 20);
+                            }
+                        
+                            document.addEventListener("scroll", lazyload);
+                            window.addEventListener("resize", lazyload);
+                            window.addEventListener("orientationChange", lazyload);
+                          }
+                        })
+                    </script>
+                    
+                    # Lazy load videos
+                    <script>
+                          document.addEventListener("DOMContentLoaded", function() {
+                          var lazyVideos = [].slice.call(document.querySelectorAll("video.lazy"));
+                        
+                          if ("IntersectionObserver" in window) {
+                            var lazyVideoObserver = new IntersectionObserver(function(entries, observer) {
+                              entries.forEach(function(video) {
+                                if (video.isIntersecting) {
+                                  for (var source in video.target.children) {
+                                    var videoSource = video.target.children[source];
+                                    if (typeof videoSource.tagName === "string" && videoSource.tagName === "SOURCE") {
+                                      videoSource.src = videoSource.dataset.src;
+                                    }
+                                  }
+                        
+                                  video.target.load();
+                                  video.target.classList.remove("lazy");
+                                  lazyVideoObserver.unobserve(video.target);
+                                }
+                              });
+                            });
+                        
+                            lazyVideos.forEach(function(lazyVideo) {
+                              lazyVideoObserver.observe(lazyVideo);
+                            });
+                          } else {  
+                            var lazyloadThrottleTimeout;
+                            lazyVideos = document.querySelectorAll("video.lazy");
+                            
+                            function lazyload () {
+                              if(lazyloadThrottleTimeout) {
+                                clearTimeout(lazyloadThrottleTimeout);
+                              }    
+                        
+                              lazyloadThrottleTimeout = setTimeout(function() {
+                                var scrollTop = window.pageYOffset;
+                                lazyVideos.forEach(function(video) {
+                                    if(video.offsetTop < (window.innerHeight + scrollTop)) {
+                                      video.src = video.dataset.src;
+                                      video.classList.remove('lazy');
+                                    }
+                                });
+                                if(lazyVideos.length == 0) { 
                                   document.removeEventListener("scroll", lazyload);
                                   window.removeEventListener("resize", lazyload);
                                   window.removeEventListener("orientationChange", lazyload);
