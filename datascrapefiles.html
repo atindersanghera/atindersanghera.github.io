@@ -1,27 +1,286 @@
 <!doctype html>
 <html lang="en-US">
     <head>
+        <!-- Analytics --> 
+        <script>var clicky_site_ids = clicky_site_ids || []; clicky_site_ids.push(101254651);</script>
+        <script async src="https://static.getclicky.com/js"></script>
+        
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166253975-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+        
+          gtag('config', 'UA-166253975-1');
+        </script>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
         <title>Atinder's Project Page</title>
-        <link rel="stylesheet" type="text/css" href="assets/css/main.css">
-        <link rel="SHORTCUT ICON" HREF="assets/images/face.jpeg">
+        <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+        <link rel="SHORTCUT ICON" HREF="/assets/images/face.jpeg">
         <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    </head>
+
+    <body>
         <!--Navigation bar-->
             <div id="nav-placeholder">
             </div>
             <script>
                 $(function(){
-                  $("#nav-placeholder").load("navbar.html");
+                  $("#nav-placeholder").load("/navbar.html");
                 });
             </script>
         <!--end of Navigation bar-->
-    </head>
-
-    <body>
-        <h2>Data Scraping: Pictures</h2>
         
-        <div>
-            <p>Coming Soon</p>
+        <h2 class="heading">Data Scraping & SQL Database: Pictures</h2>
+        
+        <div class="body">
+            <p>I created a program that scrapes the links to the top 5 pictures and videos every day from my favourite subreddits from reddit.com and adds them to a SQL database.</p><br>
+            <div style="margin-left:50px">
+                <a href=".\assets\subsites\scrapefilecollection\cute.html" class="buttonproject">Cute Pictures</a><br/>
+                <a href=".\assets\subsites\scrapefilecollection\nature.html" class="buttonproject">Pictures of Nature</a><br/>
+            </div>
+    <p><br><br>I have updated the code to use a SQL database using MySQL and Python.</p>
+    <p>The SQL code was implemented in the following way:</p>
+
+    <p style="margin-left: 40px">Import required modules</p>
+        <pre><code>            import mysql.connector as mysql
+        </code></pre>
+
+    <p style="margin-left: 40px">Connect to the database using your username and password</p>
+        <pre><code>            db = mysql.connect(
+                host = "localhost",
+                user = "",
+                passwd = ""
+            )
+        </code></pre>
+
+    <p style="margin-left: 40px">Create a cursor that allows execution of SQL statements</p>
+        <pre><code>            cursor = db.cursor()
+        </code></pre>
+
+    <p style="margin-left: 40px">Create your reddit database</p>
+        <pre><code>            cursor.execute("CREATE DATABASE reddit")
+        </code></pre>
+
+    <p style="margin-left: 40px">Connect to your new database</p>
+        <pre><code>            db = mysql.connect(
+                host = "localhost",
+                user = "",
+                passwd = "",
+                database = "reddit"
+            )
+            cursor = db.cursor()
+        </code></pre>
+
+    <p style="margin-left: 40px">Create tables for posts and files with file names as primary keys because each file is unique</p>
+        <pre><code>            cursor.execute("""CREATE TABLE posts (file_name VARCHAR(255) NOT NULL PRIMARY KEY, source_url VARCHAR(255),
+                               subreddit_name VARCHAR(255), post_name VARCHAR(255), date_posted DATETIME)""")
+            cursor.execute("""CREATE TABLE files (file_name VARCHAR(255) NOT NULL PRIMARY KEY,
+                            file_url VARCHAR(255), has_audio BOOLEAN, is_video BOOLEAN)""")
+        </code></pre>
+
+    <p style="margin-left: 40px">Execute SQL queries to insert values associated to each column into your tables
+    (These commands replace the dataframe append in the main code)</p>
+        <pre><code>            query = "INSERT INTO posts (file_name, source_url, subreddit_name, post_name, date_posted) VALUES (%s, %s, %s, %s, %s)"
+            values = (file_name, source_url, subreddit_name, submission.title, date_posted)
+            cursor.execute(query, values)
+            query = "INSERT INTO files (file_name, file_url, has_audio, is_video) VALUES (%s, %s, %s, %s)"
+            values = (file_name, url, file_has_audio(file_name, url), file_is_video(file_name))
+            cursor.execute(query, values)
+        </code></pre>
+    <p style="margin-left: 40px">Update the database after executing the queries above</p>
+        <pre><code>            db.commit()
+        </code></pre>
+
+    <p style="margin-left: 40px">Can check if a file exists in the database by querying the database using SELECT</p>
+        <pre><code>            cursor.execute("SELECT file_name FROM files")
+            names = cursor.fetchall()
+            if your_file in names: print("File exists")
+        </code></pre>
+
+    <br>
+    <p style="margin-left: 40px">You can now use the updated database to build your HTML code.</p>
+    <p style="margin-left: 40px">SELECT the DISTINCT subreddits in the database</p>
+        <pre><code>            cursor.execute("SELECT DISTINCT subreddit_name FROM posts")
+            subreddit_names = cursor.fetchall()
+        </code></pre>
+
+    <p style="margin-left: 40px">Build the HTML body containing code to display text, images and videos on the webpage</p>
+        <pre><code>            html_body = {}
+        </code></pre>
+    <p style="margin-left: 40px">Loop through subreddits individually, and join the tables using queries to get the file names</p>
+        <pre><code>            for subreddit_name, in subreddit_names:
+        </code></pre>
+         <p style="margin-left: 40px">Use SELECT * to obtain all columns</p>
+         <p style="margin-left: 40px">INNER JOIN the two tables ON file_name to get the union i.e. the rows where file_name exists in both tables (In this example there are no missing file_name values)</p>
+         <p style="margin-left: 40px">Use WHERE to filter for the subreddit you are looking at</p>
+         <p style="margin-left: 40px">ORDER BY the date the file was uploaded onto reddit in descending order. (So that newer links will show at the top of the web page) </p>
+         <p style="margin-left: 40px">(You could alternatively also use a UNION query of the two tables)</p>
+            <pre><code>                cursor.execute("SELECT * from posts INNER JOIN files ON posts.file_name = files.file_name WHERE posts.subreddit_name = '%s' ORDER BY posts.date_posted DESC" % (subreddit_name))
+                    subreddit_files = cursor.fetchall()
+            </code></pre>
+    
+        <pre><code>            html_code = []
+            # loop through each row which is assoicated to a different file. Each row is returned as a tuple
+            for file_name, source_url, _, post_name, date_posted, _, file_url, has_audio, is_video in subreddit_files:
+                # assemble your code for the file using the database and append it to the list
+                html_code.append(your_html_code_for_each_file_using_database)
+        
+            # join the HTML code together for each subreddit
+            html_body.update({subreddit_name: "".join(html_code)})
+        </code></pre>
+
+    <p style="margin-left: 40px">Close the database</p>
+        <pre><code>            db.close()
+        </code></pre>
+
+    <p style="margin-left: 40px">If anything went wrong you can drop the database and start over</p>
+        <pre><code>            cursor.execute("DROP DATABASE reddit")
+        </code></pre>
+
+    <p><br><br>The main code is below. This example also adds the name of the file into a .csv database.</p>
+            
+    <p style="margin-left: 40px">Import required modules</p>
+        <pre><code>            import os
+            import praw
+            import requests
+            from bs4 import BeautifulSoup as bs
+            from moviepy.editor import VideoFileClip
+            import pandas as pd
+            from datetime import datetime
+        </code></pre>
+    <p style="margin-left: 40px">Load reddit instance using Reddit API log in details</p>
+        <pre><code>            reddit = praw.Reddit(client_id="", client_secret="", password="", user_agent="", username="")
+        </code></pre>
+    <p style="margin-left: 40px">Choose subreddit</p>
+        <pre><code>            subreddit_name = "aww"
+        </code></pre>
+    <p style="margin-left: 40px">Open the database</p>
+        <pre><code>            database_loc = r"./reddit_database.csv"
+            # load file if it exists, or create it
+            if os.path.exists(database_loc):
+                reddit_df = pd.read_csv(database_loc)
+            else:
+                reddit_df = pd.DataFrame([], columns = ["file_name","subreddit_name","post_name",
+                                                "date_posted","has_audio","is_video","source_url","file_url"])
+        </code></pre>
+    <p style="margin-left: 40px">Get the top 5 hot posts in the subreddit</p>
+        <pre><code>            subreddit = reddit.subreddit(subreddit_name)
+            submissions = []
+            for submission in subreddit.hot(limit=5):
+                submissions.append(submission)
+        </code></pre>
+    <p style="margin-left: 40px">Get the file urls and add them to the database along with useful information</p>
+        <pre><code>            for i, submission in enumerate(submissions):
+                # convert time from float
+                date_posted = datetime.utcfromtimestamp(submission.created_utc)
+                
+                source_url = submission.url
+                
+                # find the direct link to the video or image
+                url = find_file_link(source_url)
+                if url is None: continue
+                
+                # get file name
+                file_name = url.split('/')[-1]
+                
+                # skip file if it already exists
+                if file_name in reddit_df['file_name'].tolist(): print("File exists:", url); continue
+                
+                # load file & check that the url works
+                file = open_url(url)
+                if file is None: continue
+                
+                # optional: save the file in chunks (if you don't want just the links)
+                # print("Saving file", i+1, "of", len(submissions), ":", url)
+                # save_dir = "./"
+                # save_file(save_dir, file_name, file)
+                
+                # append to dataframe
+                reddit_df = reddit_df.append({'file_name': file_name, 'subreddit_name': subreddit_name,
+                                            'post_name': submission.title, 'date_posted': date_posted,
+                                            'has_audio': file_has_audio(file_name, url),
+                                            'is_video': file_is_video(file_name),
+                                            'source_url': source_url, 'file_url': url},
+                                            ignore_index=True)
+            # convert time to dataframe format
+            reddit_df.date_posted = pd.to_datetime(reddit_df.date_posted, format="%Y-%m-%d %H:%M:%S")
+            # save database to file
+            reddit_df.to_csv(database_loc, index = False, header=True)
+        </code></pre>
+    
+    <p><br><br>Functions called above are defined here.<br></p>
+    <p style="margin-left: 40px">Convert the source url to a direct link to the file</p>
+        <pre><code>            def find_file_link(url):
+                file_extension = url.split('.')[-1]
+                valid_extension_list = ["jpg","jpeg","gif","png","mp4"]
+                
+                if url.startswith("https://gfycat"):
+                    soup = bs(requests.get(url).content)
+                    tag = soup.findAll("source", {"type": "video/mp4"})[1]
+                    url = tag.attrs['src']
+                elif url.startswith("https://v.redd.it/"):
+                    # convert to video using vreddit and get link
+                    url = "https://vreddit.cc/"+url.split('/')[-1]
+                    source = requests.get(url).content # load link to fetch file
+                    url = url+".mp4"
+                elif url.startswith("https://imgur.com"):
+                    soup = bs(requests.get(url).content)
+                    tags = soup.findAll("meta", {"property": "og:video"})
+                    if not tags: # if image
+                        tags = soup.findAll("meta", {"name": "twitter:image"})
+                    url = tags[0].attrs["content"]
+                elif file_extension == "gifv": url = url[:-4]+"mp4"
+                elif file_extension not in valid_extension_list: return
+                # if not caught, it's already a valid extension :)
+                return url
+        </code></pre>
+    <p style="margin-left: 40px">Check if a file is a video</p>
+        <pre><code>            def file_is_video(file_name):
+                valid_video_extension_list = ["mp4"]
+                return file_name.split('.')[-1] in valid_video_extension_list
+        </code></pre>
+    <p style="margin-left: 40px">Check if a file has audio</p>
+        <pre><code>            def file_has_audio(file_name, url):
+                if file_is_video(file_name):
+                    video = VideoFileClip(url)
+                    if video is not None and video.audio is not None: return True
+                return False
+        </code></pre>
+    <p style="margin-left: 40px">Check if a file exists in folder hierarchy</p>
+        <pre><code>            def file_exists(File):
+                for root, dirs, files in os.walk('./'):  
+                    if File in files: return True
+                return False
+        </code></pre>
+    <p style="margin-left: 40px">Open a url link</p>
+        <pre><code>            def open_url(url):
+                try:
+                    file = requests.get(url, stream=True)
+                    file.raise_for_status()
+                    return file
+                except requests.exceptions.HTTPError as errh:
+                    print ("HTTP Error:", errh)
+                    return
+                except requests.exceptions.ConnectionError as errc:
+                    print ("Connection Error:", errc)
+                    return
+                except requests.exceptions.Timeout as errt:
+                    print ("Timeout Error:", errt)
+                    return
+                except requests.exceptions.RequestException as err:
+                    print ("Unexpected Error:", err)
+                    return
+        </code></pre>
+    <p style="margin-left: 40px">Save a file locally in chunks</p>
+        <pre><code>            def save_file(save_dir, file_name, file):
+                with open(save_dir+file_name, 'wb') as fd:
+                     for chunk in file.iter_content(chunk_size=128):
+                         fd.write(chunk)
+        </code></pre>
+        
         </div>
     </body>
 </html>
+
