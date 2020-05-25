@@ -113,24 +113,32 @@
     <p style="margin-left: 40px">Loop through subreddits individually, and join the tables using queries to get the file names</p>
         <pre><code>            for subreddit_name, in subreddit_names:
         </code></pre>
-         <p style="margin-left: 40px">Use SELECT * to obtain all columns</p>
-         <p style="margin-left: 40px">INNER JOIN the two tables ON file_name to get the union i.e. the rows where file_name exists in both tables (In this example there are no missing file_name values)</p>
-         <p style="margin-left: 40px">Use WHERE to filter for the subreddit you are looking at</p>
-         <p style="margin-left: 40px">ORDER BY the date the file was uploaded onto reddit in descending order. (So that newer links will show at the top of the web page) </p>
-         <p style="margin-left: 40px">(You could alternatively also use a UNION query of the two tables)</p>
+        <p style="margin-left: 80px">Remove html links from the database that no longer work</p>
+            <pre><code>                if open_url(file_url) is None:
+                    cursor.execute("DELETE FROM posts WHERE file_name = '%s'" % (file_name))
+                    cursor.execute("DELETE FROM files WHERE file_name = '%s'" % (file_name))
+                    db.commit()
+                    continue
+            </code></pre>
+        
+        <p style="margin-left: 80px">Use SELECT * to obtain all columns</p>
+        <p style="margin-left: 80px">INNER JOIN the two tables ON file_name to get the union i.e. the rows where file_name exists in both tables (In this example there are no missing file_name values)</p>
+        <p style="margin-left: 80px">Use WHERE to filter for the subreddit you are looking at</p>
+        <p style="margin-left: 80px">ORDER BY the date the file was uploaded onto reddit in descending order. (So that newer links will show at the top of the web page) </p>
+        <p style="margin-left: 80px">(You could alternatively also use a UNION query of the two tables)</p>
             <pre><code>                cursor.execute("SELECT * from posts INNER JOIN files ON posts.file_name = files.file_name WHERE posts.subreddit_name = '%s' ORDER BY posts.date_posted DESC" % (subreddit_name))
                     subreddit_files = cursor.fetchall()
             </code></pre>
     
-        <pre><code>            html_code = []
-            # loop through each row which is assoicated to a different file. Each row is returned as a tuple
-            for file_name, source_url, _, post_name, date_posted, _, file_url, has_audio, is_video in subreddit_files:
-                # assemble your code for the file using the database and append it to the list
-                html_code.append(your_html_code_for_each_file_using_database)
-        
-            # join the HTML code together for each subreddit
-            html_body.update({subreddit_name: "".join(html_code)})
-        </code></pre>
+            <pre><code>                html_code = []
+                # loop through each row which is assoicated to a different file. Each row is returned as a tuple
+                for file_name, source_url, _, post_name, date_posted, _, file_url, has_audio, is_video in subreddit_files:
+                    # assemble your code for the file using the database and append it to the list
+                    html_code.append(your_html_code_for_each_file_using_database)
+            
+                # join the HTML code together for each subreddit
+                html_body.update({subreddit_name: "".join(html_code)})
+            </code></pre>
 
     <p style="margin-left: 40px">Close the database</p>
         <pre><code>            db.close()
