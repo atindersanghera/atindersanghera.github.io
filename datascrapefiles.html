@@ -35,8 +35,9 @@
         <h2 class="heading">Data Scraping & SQL Database: Pictures</h2>
         
         <div class="body">
-            <p>I created a program that scrapes the links of the top 5 pictures and videos every day from my favourite subreddits.</p>
-            <p>It then adds these links along with detailed information to a SQL database using MySQL and Python.</p>
+            <p>I created a program that uses the Reddit API to legally scrape images and videos that can be used for model training in computer vision applications.</p>
+            <p>It is fully automated to scrape the links of the top 5 pictures and videos every day from my favourite subreddits.</p>
+            <p>It then adds these links along with detailed information (including source credits) to a SQL database using MySQL and Python.</p>
             <p>The results are extracted from the created database using SQL queries such as selects & joins and where & order by clauses.</p>
             <p>They are then displayed as posts on a HTML page with autoplay and embedded lazy loading to lower bandwidth usage.</p><br>
             <div style="margin-left:50px">
@@ -161,7 +162,7 @@
             import pandas as pd
             from datetime import datetime
         </code></pre>
-    <p style="margin-left: 40px">Load reddit instance using Reddit API log in details</p>
+    <p style="margin-left: 40px">Load reddit instance using Reddit API log in details and the PRAW module</p>
         <pre><code>            reddit = praw.Reddit(client_id="", client_secret="", password="", user_agent="", username="")
         </code></pre>
     <p style="margin-left: 40px">Choose subreddit</p>
