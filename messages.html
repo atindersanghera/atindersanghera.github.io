@@ -1,25 +1,47 @@
 <!doctype html>
 <html lang="en-US">
     <head>
+        <!-- Analytics --> 
+        <script>var clicky_site_ids = clicky_site_ids || []; clicky_site_ids.push(101254651);</script>
+        <script async src="https://static.getclicky.com/js"></script>
+        
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166253975-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+        
+          gtag('config', 'UA-166253975-1');
+        </script>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
         <title>Atinder's Project Page</title>
-        <link rel="stylesheet" type="text/css" href="assets/css/main.css">
-        <link rel="SHORTCUT ICON" HREF="assets/images/face.jpeg">
+        <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+        <link rel="SHORTCUT ICON" HREF="/assets/images/face.jpeg">
         <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    </head>
+    
+    <body>
         <!--Navigation bar-->
             <div id="nav-placeholder">
-            
             </div>
-        
             <script>
                 $(function(){
-                  $("#nav-placeholder").load("navbar.html");
+                  $("#nav-placeholder").load("/navbar.html");
                 });
             </script>
         <!--end of Navigation bar-->
-    </head>
-
-    <body>
-        <p>Coming Soon</p>
+        
+        <h2 class="heading">Data Scraping & Visualisation: Message Analysis</h2>
+        
+        <div class="body">
+    <!--# word count + analysis
+	# show functions used
+	-->
+            <p>Top 5 words</p>
+            <p>Word count</p>
+            <p>Dog mentions</p>
+        </div>
     </body>
 </html>
 
