@@ -39,6 +39,13 @@
 			rect.dark {
 				stroke: #df2929;
 			}
+			rect.low {
+				fill: #FFFFFF;
+			}
+		
+			rect.high {
+				fill: #FFFF00;
+			}
 			
 			path {
 				fill: none;
@@ -90,7 +97,8 @@
 			<p>The chart below utilises the D3 visualisation tool with the Netflix and iMDB movies datasets to build a story and is inspired by drzax from ABC News.</p>
 			<p>It shows popular Hollywood actors & actresses that collaborated for movies over time where data has been subset for Hollywood actors that have been in at least 8 movies.</p>
 			<p>Each rectangle is a movie ordered by release year and shows the actors that starred in it together.</p>
-			<p>A blue line indicates an actor with an average IMDB rating of at least 6.5 over all the movies they have starred in and a red line is the covnerse.</p>
+			<p>A blue line indicates an actor with more Fresh movies than Rotten from the Rotten Tomatoes dataset over all the movies they have starred in and a red line is the converse.</p>
+			<p> The fill signifies how much the movie grossed worldwide with a yellow fill signifying a gross over the average of $129 million.</p>
 			<p>As we move to the right, it is apparent that red actors tend to have red co-stars.</p><br>
 		</div>
 		

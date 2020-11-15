@@ -36,7 +36,7 @@ d3.json('data.json', function(err, response){
 	narrative = d3.layout.narrative()
 		.scenes(scenes)
 		.size([width,height])
-		.pathSpace(10)
+		.pathSpace(20)
 		.groupMargin(10)
 		.labelSize([250,15])
 		.scenePadding([5,sceneWidth/2,5,sceneWidth/2])
@@ -64,11 +64,12 @@ d3.json('data.json', function(err, response){
 				.attr('x', 0)
 				.attr('rx', 3)
 				.attr('ry', 3)
-				.attr('class', 'light');
-				//.attr('class', function(d){
-				//	return 'color ' + d.character.affiliation;
-				//});
-
+        		//.attr('class', function(d, i){
+            	//	return response.extradata[i].gross;
+        		//});
+				.attr('class', function(d, i){
+    				return response.extradata[i].gross + ' ' + response.extradata[i].rating;
+				});
 
 	// Draw appearances
 	svg.selectAll('.scene').selectAll('.appearance').data(function(d){
@@ -139,8 +140,10 @@ d3.json('data.json', function(err, response){
 
 		});
 
-	var names = ["Actors with high rated movies", "Actors with low rated movies"]
+	var names = ["Actors with high rated movies", "Actors with low rated movies", "High rated movie", "Low rated movie", "High grossing movie", "Low grossing movie"]
 	var colours = ["#3c6da8", "#df2929"]
+	var colours_stroke = ["#FFFFFF", "#FFFFFF", "#3c6da8", "#df2929", "#FFFF00", "#000000"]
+	var colours_fill = ["none", "none", "#FFFFFF", "#FFFFFF", "#FFFF00", "#FFFFFF"]
 
 	// Create legend
     var legend = svg.selectAll(".legend")
@@ -149,17 +152,30 @@ d3.json('data.json', function(err, response){
         .attr("class", "legend")
         .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
 
+    var x0 = 250
+    var y0 = 300
     legend.append("line")//making a line for legend
-        .attr("x1", 250)
-        .attr("x2", 235)
-        .attr("y1", 190)
-        .attr("y2", 190)
+        .attr("x1", x0)
+        .attr("x2", x0-15)
+        .attr("y1", y0)
+        .attr("y2", y0)
         .style("stroke","5,5")
         .style("stroke", function(d, i) { return colours[i]; });
-
+        
+    legend.append("rect")//making a line for legend
+        .attr("x", x0-15)
+        .attr("y", y0-7)
+        .attr("width", 15)
+        .attr("height", 10)
+        .style("stroke","5,5")
+		.attr('rx', 3)
+		.attr('ry', 3)
+        .style("stroke", function(d, i) { return colours_stroke[i]; })
+        .style("fill", function(d, i) { return colours_fill[i]; });
+        
     legend.append("text")
-        .attr("x", 225)
-        .attr("y", 189)
+        .attr("x", x0-25)
+        .attr("y", y0-1)
         .attr("dy", ".35em")
         .style("text-anchor", "end")
         .text(function(d) { return d; });

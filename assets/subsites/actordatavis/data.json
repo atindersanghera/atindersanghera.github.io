@@ -454,257 +454,341 @@
 	"scenes": [
 		[
 			"Robert De Niro",
-			"Harvey Keitel",
-			"gross": "41131",
-			"rating": "1"
+			"Harvey Keitel"
 		],
 		[
 			"Robert De Niro",
-			"Harvey Keitel",
-			"gross": "28441292",
-			"rating": "1"
+			"Harvey Keitel"
 		],
 		[
 			"Bruce Willis",
-			"Halle Berry",
-			"gross": "59509925",
-			"rating": "0"
+			"Halle Berry"
 		],
 		[
 			"Johnny Depp",
-			"John C. Reilly",
-			"gross": "10032765",
-			"rating": "1"
+			"John C. Reilly"
 		],
 		[
 			"John Travolta",
 			"Samuel L. Jackson",
 			"Harvey Keitel",
-			"Bruce Willis",
-			"gross": "222831817",
-			"rating": "1"
+			"Bruce Willis"
 		],
 		[
 			"Woody Harrelson",
-			"Bill Murray",
-			"gross": "25023434",
-			"rating": "0"
+			"Bill Murray"
 		],
 		[
 			"Mindy Sterling",
-			"Will Ferrell",
-			"gross": "67683989",
-			"rating": "1"
+			"Will Ferrell"
 		],
 		[
 			"Johnny Depp",
-			"Michael Madsen",
-			"gross": "124909762",
-			"rating": "1"
+			"Michael Madsen"
 		],
 		[
 			"Samuel L. Jackson",
-			"Robert De Niro",
-			"gross": "39673162",
-			"rating": "1"
+			"Robert De Niro"
 		],
 		[
 			"Will Ferrell",
-			"Molly Shannon",
-			"gross": "30331165",
-			"rating": "0"
+			"Molly Shannon"
 		],
 		[
 			"Mindy Sterling",
-			"Will Ferrell",
-			"gross": "312016928",
-			"rating": "0"
+			"Will Ferrell"
 		],
 		[
 			"Alfred Molina",
-			"John C. Reilly",
-			"gross": "48451803",
-			"rating": "1"
+			"John C. Reilly"
 		],
 		[
 			"Molly Shannon",
-			"Will Ferrell",
-			"gross": "30636478",
-			"rating": "0"
+			"Will Ferrell"
 		],
 		[
 			"Lucy Liu",
-			"Bill Murray",
-			"gross": "264105545",
-			"rating": "1"
+			"Bill Murray"
 		],
 		[
 			"Lucy Liu",
-			"Bill Murray",
-			"gross": "264105545",
-			"rating": "0"
+			"Bill Murray"
 		],
 		[
 			"Molly Shannon",
-			"Mindy Sterling",
-			"gross": "345141403",
-			"rating": "1"
+			"Mindy Sterling"
 		],
 		[
 			"Johnny Depp",
-			"Ray Liotta",
-			"gross": "83282296",
-			"rating": "0"
+			"Ray Liotta"
 		],
 		[
 			"Carla Gugino",
-			"Danny Trejo",
-			"gross": "147934180",
-			"rating": "1"
+			"Danny Trejo"
 		],
 		[
 			"John Travolta",
 			"Halle Berry",
-			"Don Cheadle",
-			"gross": "147080413",
-			"rating": "0"
+			"Don Cheadle"
 		],
 		[
 			"Adam Sandler",
-			"Woody Harrelson",
-			"gross": "195745823",
-			"rating": "0"
+			"Woody Harrelson"
 		],
 		[
 			"Nicolas Cage",
-			"Harvey Keitel",
-			"gross": "347512318",
-			"rating": "0"
+			"Harvey Keitel"
 		],
 		[
 			"George Clooney",
 			"Matt Damon",
-			"Don Cheadle",
-			"gross": "362744280",
-			"rating": "0"
+			"Don Cheadle"
 		],
 		[
 			"Will Smith",
-			"Kevin James",
-			"gross": "371594210",
-			"rating": "1"
+			"Kevin James"
 		],
 		[
 			"Bruce Willis",
-			"Michael Madsen",
-			"gross": "158733820",
-			"rating": "1"
+			"Michael Madsen"
 		],
 		[
 			"Matt Damon",
-			"Anthony Anderson",
-			"gross": "291465034",
-			"rating": "1"
+			"Anthony Anderson"
 		],
 		[
 			"Molly Shannon",
-			"Morgan Freeman",
-			"gross": "174440724",
-			"rating": "0"
+			"Morgan Freeman"
 		],
 		[
 			"George Clooney",
 			"Matt Damon",
-			"Don Cheadle",
-			"gross": "311312624",
-			"rating": "1"
+			"Don Cheadle"
 		],
 		[
 			"Halle Berry",
-			"Bruce Willis",
-			"gross": "73534117",
-			"rating": "0"
+			"Bruce Willis"
 		],
 		[
 			"Robert De Niro",
-			"Carla Gugino",
-			"gross": "79498846",
-			"rating": "0"
+			"Carla Gugino"
 		],
 		[
 			"Will Smith",
-			"Woody Harrelson",
-			"gross": "169748929",
-			"rating": "0"
+			"Woody Harrelson"
 		],
 		[
 			"Will Ferrell",
 			"John C. Reilly",
 			"Adam Scott",
 			"Kathryn Hahn",
-			"Rob Riggle",
-			"gross": "128107642",
-			"rating": "0"
+			"Rob Riggle"
 		],
 		[
 			"John C. Reilly",
-			"Fred Tatasciore",
-			"gross": "48428063",
-			"rating": "0"
+			"Fred Tatasciore"
 		],
 		[
 			"Morgan Freeman",
-			"Matt Damon",
-			"gross": "122426792",
-			"rating": "1"
+			"Matt Damon"
 		],
 		[
 			"Kathryn Hahn",
-			"Rob Riggle",
-			"gross": "15300885",
-			"rating": "0"
+			"Rob Riggle"
 		],
 		[
 			"Woody Harrelson",
-			"Bill Murray",
-			"gross": "102392080",
-			"rating": "1"
+			"Bill Murray"
 		],
 		[
 			"Amy Adams",
-			"Adam Scott",
-			"gross": "32686500",
-			"rating": "0"
+			"Adam Scott"
 		],
 		[
 			"Kathryn Hahn",
-			"Adam Scott",
-			"gross": "25804448",
-			"rating": "1"
+			"Adam Scott"
 		],
 		[
 			"Nicolas Cage",
-			"Ron Perlman",
-			"gross": "91627228",
-			"rating": "0"
+			"Ron Perlman"
 		],
 		[
 			"Liev Schreiber",
-			"Halle Berry",
-			"gross": "32443111",
-			"rating": "0"
+			"Halle Berry"
 		],
 		[
 			"Ryan Reynolds",
-			"Samuel L. Jackson",
-			"gross": "282570682",
-			"rating": "1"
+			"Samuel L. Jackson"
 		],
 		[
 			"Robert De Niro",
-			"Harvey Keitel",
-			"gross": "968853",
-			"rating": "1"
+			"Harvey Keitel"
 		]
+	],
+	"extradata": [
+		{
+			"gross": "high",
+			"rating": "light"
+		},
+		{
+			"gross": "high",
+			"rating": "light"
+		},
+		{
+			"gross": "high",
+			"rating": "dark"
+		},
+		{
+			"gross": "high",
+			"rating": "light"
+		},
+		{
+			"gross": "low",
+			"rating": "light"
+		},
+		{
+			"gross": "high",
+			"rating": "dark"
+		},
+		{
+			"gross": "high",
+			"rating": "light"
+		},
+		{
+			"gross": "high",
+			"rating": "light"
+		},
+		{
+			"gross": "high",
+			"rating": "light"
+		},
+		{
+			"gross": "high",
+			"rating": "dark"
+		},
+		{
+			"gross": "low",
+			"rating": "dark"
+		},
+		{
+			"gross": "high",
+			"rating": "light"
+		},
+		{
+			"gross": "high",
+			"rating": "dark"
+		},
+		{
+			"gross": "low",
+			"rating": "light"
+		},
+		{
+			"gross": "low",
+			"rating": "dark"
+		},
+		{
+			"gross": "low",
+			"rating": "light"
+		},
+		{
+			"gross": "high",
+			"rating": "dark"
+		},
+		{
+			"gross": "low",
+			"rating": "light"
+		},
+		{
+			"gross": "low",
+			"rating": "dark"
+		},
+		{
+			"gross": "low",
+			"rating": "dark"
+		},
+		{
+			"gross": "low",
+			"rating": "dark"
+		},
+		{
+			"gross": "low",
+			"rating": "dark"
+		},
+		{
+			"gross": "low",
+			"rating": "light"
+		},
+		{
+			"gross": "low",
+			"rating": "light"
+		},
+		{
+			"gross": "low",
+			"rating": "light"
+		},
+		{
+			"gross": "low",
+			"rating": "dark"
+		},
+		{
+			"gross": "low",
+			"rating": "light"
+		},
+		{
+			"gross": "high",
+			"rating": "dark"
+		},
+		{
+			"gross": "high",
+			"rating": "dark"
+		},
+		{
+			"gross": "low",
+			"rating": "dark"
+		},
+		{
+			"gross": "high",
+			"rating": "dark"
+		},
+		{
+			"gross": "high",
+			"rating": "dark"
+		},
+		{
+			"gross": "high",
+			"rating": "light"
+		},
+		{
+			"gross": "high",
+			"rating": "dark"
+		},
+		{
+			"gross": "high",
+			"rating": "light"
+		},
+		{
+			"gross": "high",
+			"rating": "dark"
+		},
+		{
+			"gross": "high",
+			"rating": "light"
+		},
+		{
+			"gross": "high",
+			"rating": "dark"
+		},
+		{
+			"gross": "high",
+			"rating": "dark"
+		},
+		{
+			"gross": "low",
+			"rating": "light"
+		},
+		{
+			"gross": "high",
+			"rating": "light"
+		}
 	]
 }
