@@ -63,7 +63,11 @@ d3.json('data.json', function(err, response){
 				.attr('y', 0)
 				.attr('x', 0)
 				.attr('rx', 3)
-				.attr('ry', 3);
+				.attr('ry', 3)
+				.attr('class', 'light');
+				//.attr('class', function(d){
+				//	return 'color ' + d.character.affiliation;
+				//});
 
 
 	// Draw appearances
